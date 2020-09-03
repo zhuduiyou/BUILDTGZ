@@ -1,0 +1,6 @@
+# action.yml
+name: 'Builder'
+description: 'Build packages for debian buster.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

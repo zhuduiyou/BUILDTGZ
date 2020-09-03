@@ -1,0 +1,32 @@
+on: [push]
+
+jobs:
+  emacs:
+    runs-on: ubuntu-latest
+    name: Build emacs for debian.
+    steps:
+    - name: Make a build shell
+      run: |
+        echo 'echo "deb-src http://deb.debian.org/debian/ buster main" >> /etc/apt/sources.list' > run.sh
+        echo 'echo "deb-src http://security.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list' >> run.sh
+        echo 'echo "deb-src http://deb.debian.org/debian/ buster-updates main" >> /etc/apt/sources.list' >> run.sh
+        echo 'apt-get update' >> run.sh
+        echo 'apt-get upgrade' >> run.sh
+        echo 'apt-get build-dep emacs-nox -y' >> run.sh
+        echo 'apt-get install --no-install-recommends wget -y' >> run.sh
+        echo 'wget http://ftpmirror.gnu.org/emacs/emacs-27.1.tar.gz' >> run.sh
+        echo 'tar -xzvf emacs-27.1.tar.gz' >> run.sh
+        echo 'cd emacs-27.1' >> run.sh
+        echo './configure --prefix=/tmp/BUILD --without-x --with-mailutils' >> run.sh
+        echo 'make && make install' >> run.sh
+        echo 'tar -czvf /github/workspace/emacs.tgz /tmp/BUILD' >> run.sh
+        cat run.sh
+    - name: Build emacs
+      id: build
+      uses: lst-lang/BUILDTGZ@v0.1
+    - name: Upload emacs
+      id: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: emacs
+        path: /home/runner/work/BUILDTGZ/BUILDTGZ/emacs.tgz
