@@ -23,7 +23,7 @@ jobs:
         cat run.sh
     - name: Build gimp
       id: build
-      uses: lst-lang/BUILDTGZ@v0.1
+      uses: zhuduiyou/BUILDTGZ@v0.1
     - name: Upload gimp
       id: upload
       uses: actions/upload-artifact@v2
