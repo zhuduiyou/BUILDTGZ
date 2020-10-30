@@ -1,9 +1,9 @@
 on: [push]
 
 jobs:
-  gimp:
+  git:
     runs-on: ubuntu-latest
-    name: Build gimp for debian.
+    name: Build git for debian.
     steps:
     - name: Make a build shell
       run: |
@@ -12,21 +12,22 @@ jobs:
         echo 'echo "deb-src http://deb.debian.org/debian/ buster-updates main" >> /etc/apt/sources.list' >> run.sh
         echo 'apt-get update' >> run.sh
         echo 'apt-get upgrade' >> run.sh
-        echo 'apt-get build-dep gimp -y' >> run.sh
+        echo 'apt-get build-dep git -y' >> run.sh
         echo 'apt-get install --no-install-recommends wget -y' >> run.sh
-        echo 'wget https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.22.tar.bz2' >> run.sh
-        echo 'tar -xvf gimp-2.10.22.tar.bz2' >> run.sh
-        echo 'cd gimp-2.10.22' >> run.sh
+        echo 'apt-get install --no-install-recommends make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip -y' >> run.sh
+        echo 'wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.29.2.tar.gz' >> run.sh
+        echo 'tar -xzvf git-2.29.2.tar.gz' >> run.sh
+        echo 'cd git-2.29.2' >> run.sh
         echo './configure --prefix=/tmp/BUILD' >> run.sh
         echo 'make && make install' >> run.sh
-        echo 'tar -czvf /github/workspace/gimp.tgz /tmp/BUILD' >> run.sh
+        echo 'tar -czvf /github/workspace/git.tgz /tmp/BUILD' >> run.sh
         cat run.sh
-    - name: Build gimp
+    - name: Build git
       id: build
       uses: zhuduiyou/BUILDTGZ@v0.1
-    - name: Upload gimp
+    - name: Upload git
       id: upload
       uses: actions/upload-artifact@v2
       with:
-        name: gimp
-        path: /home/runner/work/BUILDTGZ/BUILDTGZ/gimp.tgz
+        name: git
+        path: /home/runner/work/BUILDTGZ/BUILDTGZ/git.tgz
