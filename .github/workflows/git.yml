@@ -14,7 +14,7 @@ jobs:
         echo 'apt-get upgrade' >> run.sh
         echo 'apt-get build-dep git -y' >> run.sh
         echo 'apt-get install --no-install-recommends wget -y' >> run.sh
-        echo 'apt-get install --no-install-recommends make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip -y' >> run.sh
+        echo 'apt-get install --no-install-recommends ca-certificates make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip -y' >> run.sh
         echo 'wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.29.2.tar.gz' >> run.sh
         echo 'tar -xzvf git-2.29.2.tar.gz' >> run.sh
         echo 'cd git-2.29.2' >> run.sh

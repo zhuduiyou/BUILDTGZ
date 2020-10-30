@@ -13,7 +13,7 @@ jobs:
         echo 'apt-get update' >> run.sh
         echo 'apt-get upgrade' >> run.sh
         echo 'apt-get build-dep gimp -y' >> run.sh
-        echo 'apt-get install --no-install-recommends wget -y' >> run.sh
+        echo 'apt-get install --no-install-recommends ca-certificates wget -y' >> run.sh
         echo 'wget https://download.gimp.org/mirror/pub/gimp/v2.10/gimp-2.10.22.tar.bz2' >> run.sh
         echo 'tar -xvf gimp-2.10.22.tar.bz2' >> run.sh
         echo 'cd gimp-2.10.22' >> run.sh

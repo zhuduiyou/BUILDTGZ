@@ -13,7 +13,7 @@ jobs:
         echo 'apt-get update' >> run.sh
         echo 'apt-get upgrade' >> run.sh
         echo 'apt-get build-dep emacs-nox -y' >> run.sh
-        echo 'apt-get install --no-install-recommends wget -y' >> run.sh
+        echo 'apt-get install --no-install-recommends ca-certificates wget -y' >> run.sh
         echo 'wget http://ftpmirror.gnu.org/emacs/emacs-27.1.tar.gz' >> run.sh
         echo 'tar -xzvf emacs-27.1.tar.gz' >> run.sh
         echo 'cd emacs-27.1' >> run.sh
